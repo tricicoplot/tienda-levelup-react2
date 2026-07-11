@@ -31,6 +31,18 @@ level-up-gamer/
 Construcción y Despliegue
 Este proyecto utiliza Vite como empaquetador para optimizar el rendimiento.
 
+## Acceso al Sistema (Pruebas)
+
+Para facilitar la evaluación, puedes utilizar las siguientes credenciales para probar los diferentes perfiles de usuario:
+
+| Perfil | Usuario | Contraseña |
+| :--- | :--- | :--- |
+| **Administrador** | `admin@levelup.cl` | `admin123` |
+| **Vendedor** | `vendedor@levelup.cl` | `vendedor123` |
+| **Usuario Cliente** | `usuario@test.cl` | `usuario123` |
+
+*Nota: El acceso a las rutas protegidas (`/admin/*`) está restringido según el rol del usuario autenticado.*
+
 Instalación: npm install
 
 Desarrollo: npm run dev
