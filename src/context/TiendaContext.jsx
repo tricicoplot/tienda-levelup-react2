@@ -13,7 +13,10 @@ export function TiendaProvider({ children }) {
   const [carrito, setCarrito] = useState(() => JSON.parse(localStorage.getItem('carrito')) || [])
   const [sesion, setSesion] = useState(() => JSON.parse(localStorage.getItem('sesion')) || null)
   const [productos, setProductos] = useState(() => JSON.parse(localStorage.getItem('productos')) || productosIniciales)
-  const [usuarios, setUsuarios] = useState(() => JSON.parse(localStorage.getItem('usuarios')) || usuariosData)
+  const [usuarios, setUsuarios] = useState(() => {
+    const guardados = JSON.parse(localStorage.getItem('usuarios')) || usuariosData;
+    return guardados.map(u => ({ ...u, puntos: u.puntos || 0 }));
+  })
   const [ordenes, setOrdenes] = useState(() => JSON.parse(localStorage.getItem('ordenes')) || [])
   const [resenas, setResenas] = useState(() => JSON.parse(localStorage.getItem('resenas')) || [])
   const [descuento, setDescuento] = useState(() => Number(localStorage.getItem('descuento')) || 0)
@@ -28,9 +31,6 @@ export function TiendaProvider({ children }) {
   useEffect(() => { localStorage.setItem('descuento', String(descuento)) }, [descuento])
   useEffect(() => { localStorage.setItem('cuponAplicado', cuponAplicado) }, [cuponAplicado])
 
-  // --------------------------------------------------------------------
-  // Autenticación
-  // --------------------------------------------------------------------
   const login = (email, password) => {
     const usuarioEncontrado = usuarios.find(u => u.email === email && u.password === password)
     if (usuarioEncontrado) {
@@ -45,14 +45,11 @@ export function TiendaProvider({ children }) {
     localStorage.removeItem('sesion')
   }
 
-  // --------------------------------------------------------------------
-  // Usuarios — CRUD (usa "id" como llave, se genera automáticamente)
-  // --------------------------------------------------------------------
   const agregarUsuario = (nuevo) => {
     if (usuarios.some(u => u.email.toLowerCase() === nuevo.email.toLowerCase())) {
       throw new Error('Ya existe una cuenta con ese correo electrónico.')
     }
-    const usuarioCreado = { ...nuevo, id: nextId(usuarios), rol: nuevo.rol || 'cliente' }
+    const usuarioCreado = { ...nuevo, id: nextId(usuarios), rol: nuevo.rol || 'cliente', puntos: 0 }
     setUsuarios(prev => [...prev, usuarioCreado])
     return usuarioCreado
   }
@@ -63,9 +60,6 @@ export function TiendaProvider({ children }) {
 
   const eliminarUsuario = (id) => setUsuarios(prev => prev.filter(u => u.id !== id))
 
-  // --------------------------------------------------------------------
-  // Productos — CRUD (usa "codigo" como llave, igual que antes)
-  // --------------------------------------------------------------------
   const crearProducto = (nuevo) => {
     if (productos.some(p => p.codigo === nuevo.codigo)) {
       throw new Error('Ya existe un producto con ese código.')
@@ -80,9 +74,6 @@ export function TiendaProvider({ children }) {
 
   const eliminarProducto = (codigo) => setProductos(prev => prev.filter(p => p.codigo !== codigo))
 
-  // --------------------------------------------------------------------
-  // Carrito
-  // --------------------------------------------------------------------
   const agregarAlCarrito = (producto, cantidad = 1) => {
     setCarrito(prev => {
       const existente = prev.find(i => i.codigo === producto.codigo)
@@ -107,7 +98,6 @@ export function TiendaProvider({ children }) {
     setCuponAplicado('')
   }
 
-  // Cupón de descuento: DUOC o DUOC20 = 20% de descuento
   const aplicarCupon = (codigo) => {
     const normalizado = (codigo || '').trim().toUpperCase()
     if (normalizado === 'DUOC' || normalizado === 'DUOC20') {
@@ -120,25 +110,21 @@ export function TiendaProvider({ children }) {
     return { valido: false }
   }
 
-  // --------------------------------------------------------------------
-  // Órdenes de compra
-  // --------------------------------------------------------------------
   const crearOrden = (datosOrden) => {
     const id = nextId(ordenes)
-    const nuevaOrden = {
-      id,
-      fecha: new Date().toISOString(),
-      estado: 'pagada',
-      ...datosOrden,
-    }
+    const puntosGanados = Math.floor(datosOrden.total / 1000) * 10
+    const nuevaOrden = { id, fecha: new Date().toISOString(), estado: 'pagada', ...datosOrden }
     setOrdenes(prev => [...prev, nuevaOrden])
 
-    // Descuenta stock de cada producto vendido
+    if (sesion) {
+      setUsuarios(prev => prev.map(u => u.id === sesion.id ? { ...u, puntos: (u.puntos || 0) + puntosGanados } : u))
+      setSesion(prev => ({ ...prev, puntos: (prev.puntos || 0) + puntosGanados }))
+    }
+
     setProductos(prev => prev.map(p => {
       const item = nuevaOrden.items.find(i => i.codigo === p.codigo)
       return item ? { ...p, stock: Math.max(0, p.stock - item.cantidad) } : p
     }))
-
     return nuevaOrden
   }
 
@@ -146,19 +132,17 @@ export function TiendaProvider({ children }) {
     setOrdenes(prev => prev.map(o => o.id === id ? { ...o, estado } : o))
   }
 
-  // --------------------------------------------------------------------
-  // Reseñas de productos / blog
-  // --------------------------------------------------------------------
   const agregarResena = (nueva) => {
     setResenas(prev => [...prev, { ...nueva, id: nextId(prev) }])
   }
 
   const valor = {
-    carrito, setCarrito, agregarAlCarrito, cambiarCantidadCarrito, quitarDelCarrito, vaciarCarrito,
+    carrito, agregarAlCarrito, cambiarCantidadCarrito, quitarDelCarrito, vaciarCarrito,
     descuento, cuponAplicado, aplicarCupon,
     sesion, setSesion, login, logout,
     productos, setProductos, crearProducto, editarProducto, eliminarProducto,
-    usuarios, setUsuarios, agregarUsuario, registrarUsuario: agregarUsuario, actualizarUsuario, eliminarUsuario,
+    usuarios, setUsuarios, agregarUsuario, registrarUsuario: agregarUsuario,
+    actualizarUsuario, eliminarUsuario,
     ordenes, setOrdenes, crearOrden, actualizarEstadoOrden,
     resenas, agregarResena,
   }

@@ -1,3 +1,4 @@
+// src/components/Header.jsx
 import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useTienda } from '../context/TiendaContext.jsx'
 
@@ -32,6 +33,8 @@ function Header() {
           <Link to="/carrito" className="btn btn-sm">🛒 {totalItems}</Link>
           {sesion ? (
             <>
+              {/* Enlace al perfil añadido para usuarios logueados */}
+              <Link to="/perfil" className="btn btn-sm">Perfil</Link>
               <span className="badge">{sesion.nombre}</span>
               <button className="btn btn-sm" onClick={salir}>Salir</button>
             </>
@@ -46,4 +49,5 @@ function Header() {
     </header>
   )
 }
+
 export default Header
