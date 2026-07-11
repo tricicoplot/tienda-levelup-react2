@@ -46,3 +46,5 @@ src/
 ## Pago de prueba
 - Cualquier tarjeta funciona.
 - Para simular error: número de tarjeta terminado en `0000`.
+
+## Hay otro repositorio que no pude modificar
