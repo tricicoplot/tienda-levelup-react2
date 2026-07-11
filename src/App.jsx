@@ -19,7 +19,7 @@ import Contacto from './pages/Contacto.jsx'
 import Blog from './pages/Blog.jsx'
 import BlogDetalle from './components/BlogDetalle.jsx'
 import MapaEventos from './pages/MapaEventos.jsx'
-import Perfil from './pages/Perfil.jsx' // Importado
+import Perfil from './pages/Perfil.jsx'
 import Dashboard from './pages/admin/Dashboard.jsx'
 import AdminProductos from './pages/admin/Productos.jsx'
 import ProductoForm from './pages/admin/ProductoForm.jsx'
@@ -50,11 +50,15 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogDetalle />} />
             <Route path="/eventos" element={<MapaEventos />} />
-            <Route path="/perfil" element={<RutaProtegida><Perfil /></RutaProtegida>} /> {/* Nueva ruta */}
+            <Route path="/perfil" element={<RutaProtegida><Perfil /></RutaProtegida>} />
+            
+            {/* Rutas de Administración */}
             <Route path="/admin" element={<RutaProtegida rol="admin"><Dashboard /></RutaProtegida>} />
             <Route path="/admin/productos" element={<RutaProtegida rol="admin"><AdminProductos /></RutaProtegida>} />
             <Route path="/admin/productos/nuevo" element={<RutaProtegida rol="admin"><ProductoForm /></RutaProtegida>} />
             <Route path="/admin/usuarios" element={<RutaProtegida rol="admin"><AdminUsuarios /></RutaProtegida>} />
+            <Route path="/admin/ordenes" element={<RutaProtegida rol="admin"><AdminOrdenes /></RutaProtegida>} />
+            
             <Route path="*" element={<div><h1>404</h1><p>Página no encontrada.</p></div>} />
           </Routes>
         </main>

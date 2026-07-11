@@ -1,4 +1,6 @@
-/* ImportaciÃ³n de fuentes de Google */
+/* src/index.css */
+
+/* Importación de fuentes de Google */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap');
 
 :root {
@@ -7,8 +9,8 @@
   --panel2: #1a2233;
   --texto: #FFFFFF;
   --muted: #D3D3D3;
-  --primario: #1E90FF;   /* azul neÃ³n */
-  --acento: #39FF14;     /* verde neÃ³n */
+  --primario: #1E90FF;   /* azul neón */
+  --acento: #39FF14;     /* verde neón */
   --peligro: #ff4d6d;
   --borde: #253049;
 }
@@ -18,7 +20,7 @@ html, body, #root { height: 100%; }
 
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif; /* Fuente principal aplicada */
+  font-family: 'Roboto', sans-serif;
   background: radial-gradient(1200px 800px at 80% -10%, #000000 0%, var(--bg) 60%);
   color: var(--texto);
 }
@@ -56,7 +58,7 @@ h1 { border-left: 4px solid var(--primario); padding-left: 12px; }
 /* Footer */
 .footer { border-top: 1px solid var(--borde); padding: 20px 16px; text-align: center; color: var(--muted); font-size: 14px; }
 
-/* Botones */
+/* Botones base */
 .btn { display: inline-block; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--borde); background: var(--panel2); color: var(--texto); cursor: pointer; font-weight: 600; font-size: 14px; transition: all .15s; }
 .btn:hover { border-color: var(--primario); color: var(--primario); }
 .btn-primario { background: var(--primario); color: #001018; border-color: var(--primario); }
@@ -64,6 +66,32 @@ h1 { border-left: 4px solid var(--primario); padding-left: 12px; }
 .btn-peligro { background: transparent; color: var(--peligro); border-color: var(--peligro); }
 .btn-peligro:hover { background: var(--peligro); color: #fff; }
 .btn-sm { padding: 6px 10px; font-size: 13px; }
+
+/* Estilos Neón para botones del Blog */
+.btn-azul-neon {
+  background-color: var(--primario);
+  color: #000;
+  border: none;
+  box-shadow: 0 0 10px var(--primario), 0 0 20px var(--primario);
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+.btn-azul-neon:hover {
+  background-color: var(--texto);
+  box-shadow: 0 0 20px var(--primario);
+}
+.btn-verde-neon {
+  background-color: var(--acento);
+  color: #000;
+  border: none;
+  box-shadow: 0 0 10px var(--acento), 0 0 20px var(--acento);
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+.btn-verde-neon:hover {
+  background-color: var(--texto);
+  box-shadow: 0 0 20px var(--acento);
+}
 
 /* Cards */
 .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
