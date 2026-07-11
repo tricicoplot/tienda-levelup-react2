@@ -56,9 +56,10 @@ function App() {
             <Route path="/admin" element={<RutaProtegida rol="admin"><Dashboard /></RutaProtegida>} />
             <Route path="/admin/productos" element={<RutaProtegida rol="admin"><AdminProductos /></RutaProtegida>} />
             <Route path="/admin/productos/nuevo" element={<RutaProtegida rol="admin"><ProductoForm /></RutaProtegida>} />
+            
             <Route path="/admin/usuarios" element={<RutaProtegida rol="admin"><AdminUsuarios /></RutaProtegida>} />
             <Route path="/admin/ordenes" element={<RutaProtegida rol="admin"><AdminOrdenes /></RutaProtegida>} />
-            
+            <Route path="/admin/productos/:codigo/editar" element={<RutaProtegida rol="admin"><ProductoForm /></RutaProtegida>} />
             <Route path="*" element={<div><h1>404</h1><p>Página no encontrada.</p></div>} />
           </Routes>
         </main>
