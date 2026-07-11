@@ -37,9 +37,9 @@ Para facilitar la evaluación, puedes utilizar las siguientes credenciales para 
 
 | Perfil | Usuario | Contraseña |
 | :--- | :--- | :--- |
-| **Administrador** | `admin@levelup.cl` | `admin123` |
-| **Vendedor** | `vendedor@levelup.cl` | `vendedor123` |
-| **Usuario Cliente** | `usuario@test.cl` | `usuario123` |
+| **Administrador** | `admin@levelup.cl` | `123` |
+| **Vendedor** | `vendedor@levelup.cl` | `123` |
+| **Usuario Cliente** | `usuario@test.cl` | `123` |
 
 *Nota: El acceso a las rutas protegidas (`/admin/*`) está restringido según el rol del usuario autenticado.*
 
