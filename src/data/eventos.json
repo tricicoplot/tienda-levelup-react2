@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "titulo": "Torneo Nacional de eSports",
+    "fecha": "2026-08-15",
+    "lugar": "Centro de Convenciones",
+    "lat": -33.4489,
+    "lng": -70.6693
+  },
+  {
+    "id": 2,
+    "titulo": "Expo Gamer Chile",
+    "fecha": "2026-09-20",
+    "lugar": "Movistar Arena",
+    "lat": -33.4650,
+    "lng": -70.6600
+  }
+]
