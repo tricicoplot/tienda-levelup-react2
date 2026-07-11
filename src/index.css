@@ -1,14 +1,14 @@
-/* Importación de fuentes de Google */
+/* ImportaciÃ³n de fuentes de Google */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap');
 
 :root {
-  --bg: #0b0f1a;
+  --bg: #000000;
   --panel: #121826;
   --panel2: #1a2233;
-  --texto: #e6edf7;
-  --muted: #9aa7bd;
-  --primario: #22d3ee;   /* cian neón */
-  --acento: #39ff14;     /* verde neón */
+  --texto: #FFFFFF;
+  --muted: #D3D3D3;
+  --primario: #1E90FF;   /* azul neÃ³n */
+  --acento: #39FF14;     /* verde neÃ³n */
   --peligro: #ff4d6d;
   --borde: #253049;
 }
@@ -19,7 +19,7 @@ html, body, #root { height: 100%; }
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif; /* Fuente principal aplicada */
-  background: radial-gradient(1200px 800px at 80% -10%, #14243d 0%, var(--bg) 60%);
+  background: radial-gradient(1200px 800px at 80% -10%, #000000 0%, var(--bg) 60%);
   color: var(--texto);
 }
 
