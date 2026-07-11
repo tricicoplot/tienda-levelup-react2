@@ -1,50 +1,43 @@
-# Tienda Level-Up Gamer (React + JSX)
+# Level-Up Gamer
 
-Proyecto de evaluación — Unidad 3.
-Vite + React 19 + React Router DOM + localStorage.
+Proyecto final de desarrollo web para la plataforma de e-commerce especializada en artículos y componentes para gamers.
 
-## Requisitos
-- Node.js 20+
-- Visual Studio Code
+## Competencias Técnicas
+- **SPA Development:** Navegación dinámica sin recarga mediante React Router DOM.
+- **State Management:** Implementación de `Context API` para la centralización de datos globales (productos, usuarios, órdenes).
+- **Seguridad:** Gestión de rutas protegidas mediante componentes de orden superior (HOC) basados en roles de usuario.
+- **Diseño Responsive:** Interfaz optimizada con CSS moderno, variables globales y diseño temático "Gamer".
 
-## Cómo ejecutar
-```bash
-npm install
-npm run dev
-```
-Abre http://localhost:5173
+## Estructura del Proyecto
+La arquitectura sigue buenas prácticas de modularización para facilitar el mantenimiento y escalabilidad:
 
-## Comandos
-- `npm run dev` – servidor de desarrollo
-- `npm run build` – compilar producción
-- `npm run preview` – previsualizar build
+```text
+level-up-gamer/
+├── public/              # Recursos estáticos
+│   ├── logo.svg         # Favicon institucional
+│   └── index.html       # Punto de entrada de la SPA
+├── src/
+│   ├── components/      # Componentes reutilizables (Header, Footer, UI)
+│   ├── context/         # Lógica de estado global (TiendaContext)
+│   ├── pages/           # Vistas de la aplicación
+│   │   ├── admin/       # Páginas protegidas (Dashboard, Productos, Ordenes)
+│   │   └── ...          # Vistas públicas (Home, Productos, Checkout)
+│   ├── App.jsx          # Configuración de rutas y layout principal
+│   ├── index.css        # Estilos globales (Variables neón)
+│   └── main.jsx         # Punto de montaje del DOM
+├── package.json         # Dependencias y scripts de construcción
+└── README.md            # Documentación del proyecto
 
-## Estructura
-```
-src/
-  main.jsx              → punto de entrada
-  App.jsx               → rutas de la aplicación
-  index.css             → estilos gamer (dark + neón)
-  context/
-    TiendaContext.jsx   → estado global + localStorage
-  components/
-    Header.jsx / Footer.jsx / ProductoCard.jsx / RutaProtegida.jsx
-  pages/
-    Home.jsx, Productos.jsx, ProductoDetalle.jsx,
-    Carrito.jsx, Checkout.jsx, Boleta.jsx, PagoError.jsx,
-    Login.jsx, Registro.jsx, Nosotros.jsx, Contacto.jsx,
-    admin/ (Dashboard, Productos, ProductoForm, Usuarios,
-            UsuarioForm, Ordenes, Reportes)
-  data/productos.json   → catálogo inicial
-  utils/formato.js      → formato CLP
-```
+Construcción y Despliegue
+Este proyecto utiliza Vite como empaquetador para optimizar el rendimiento.
 
-## Usuarios de prueba
-- Admin: `admin@levelup.cl` / `admin123`
-- Cliente: `cliente@levelup.cl` / `cliente123`
+Instalación: npm install
 
-## Pago de prueba
-- Cualquier tarjeta funciona.
-- Para simular error: número de tarjeta terminado en `0000`.
+Desarrollo: npm run dev
 
-## Hay otro repositorio que no pude modificar
+Build para Producción: npm run build
+Genera los archivos estáticos optimizados en la carpeta dist/.
+
+Previsualización: npm run preview
+
+Desarrollado para la evaluación de Front End - 2026
